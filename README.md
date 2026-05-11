@@ -63,30 +63,30 @@ Ten endpoints across four resource groups, fully documented via OpenAPI and expl
 ```mermaid
 flowchart LR
     Client([Client])
-    Client -->|POST /api/v1/claims| API[REST Controllers]
-    API -->|@Valid DTO| SVC[Service Layer]
-    SVC -->|persist NEW → VALIDATED| DB[(claims · providers ·<br/>routing_rules)]
+    Client -->|"POST /api/v1/claims"| API[REST Controllers]
+    API -->|"validated DTO"| SVC[Service Layer]
+    SVC -->|"persist NEW then VALIDATED"| DB[("claims, providers,<br/>routing_rules")]
     SVC --> RE[Routing Engine]
-    RE -->|active rules<br/>sorted by priority| DB
-    RE -->|every outcome| AUDIT[(routing_decisions<br/>audit log)]
-    RE -->|status ROUTED| SVC
-    SVC -->|201 Created| Client
+    RE -->|"load active rules<br/>sorted by priority"| DB
+    RE -->|"every outcome"| AUDIT[("routing_decisions<br/>audit log")]
+    RE -->|"status ROUTED"| SVC
+    SVC -->|"201 Created"| Client
 ```
 
 ### Routing engine decision flow
 
 ```mermaid
 flowchart TD
-    A[Claim arrives] --> B[Load active rules<br/>sorted by priority asc]
-    B --> C{For each rule:<br/>type · amount · region match?}
-    C -- yes --> D[Set destination<br/>status = ROUTED]
-    C -- no  --> E{More rules?}
-    E -- yes --> C
-    E -- no  --> F[status stays VALIDATED<br/>no destination]
-    C -- exception --> G[Log ERROR decision<br/>rethrow]
-    D --> H[(Audit: ROUTED)]
-    F --> I[(Audit: NO_MATCH)]
-    G --> J[(Audit: ERROR)]
+    A[Claim arrives] --> B["Load active rules<br/>sorted by priority asc"]
+    B --> C{"For each rule:<br/>type, amount, region match?"}
+    C -->|yes| D["Set destination<br/>status = ROUTED"]
+    C -->|no| E{More rules?}
+    E -->|yes| C
+    E -->|no| F["status stays VALIDATED<br/>no destination"]
+    C -->|exception| G["Log ERROR decision<br/>rethrow"]
+    D --> H[("Audit: ROUTED")]
+    F --> I[("Audit: NO_MATCH")]
+    G --> J[("Audit: ERROR")]
 ```
 
 A deeper write-up lives in [`docs/architecture.md`](docs/architecture.md).
