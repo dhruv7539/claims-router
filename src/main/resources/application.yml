@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: claims-router
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    root: INFO
+    com.dhruv.claimsrouter: INFO
