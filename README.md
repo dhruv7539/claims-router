@@ -7,7 +7,7 @@
 [![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/17/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
-[![Tests](https://img.shields.io/badge/tests-29%20passing-brightgreen)](#testing)
+[![CI](https://img.shields.io/github/actions/workflow/status/dhruv7539/claims-router/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/dhruv7539/claims-router/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 
 </div>
